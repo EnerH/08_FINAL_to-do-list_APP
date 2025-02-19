@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@heroicons/v2.0.18/24/outline/index.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-gradient-to-br from-indigo-100 to-blue-100 min-h-screen p-8">
+    <div class="max-w-2xl mx-auto">
+      <div
+        class="bg-white rounded-2xl shadow-lg p-6 mb-8 animate__animated animate__fadeIn"
+      >
+        <h1
+          class="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"
+        >
+          To Do List
+        </h1>
+
+        <form id="todoForm" class="flex gap-3 mb-8">
+          <input
+            id="taskInput"
+            type="text"
+            class="flex-1 p-4 rounded-xl border-2 border-blue-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
+            placeholder="Add new task..."
+          />
+          <button
+            type="submit"
+            class="px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105"
+          >
+            Add Task
+          </button>
+        </form>
+
+        <ul id="todoList" class="space-y-3"></ul>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

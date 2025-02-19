@@ -1,0 +1,121 @@
+/* style.css - Modern Todo App Styles */
+
+/* Custom Animations */
+@keyframes checkAnim {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes taskEntry {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes strike {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Custom Checkbox Styles */
+input[type="checkbox"] {
+  transition: all 0.2s ease;
+}
+
+input[type="checkbox"]:checked {
+  animation: checkAnim 0.4s ease;
+}
+
+/* Todo Item Animations */
+li {
+  animation: taskEntry 0.3s ease-out;
+}
+
+/* Loading Animation */
+.loading {
+  animation: pulse 1.5s infinite;
+  text-align: center;
+  color: #3b82f6;
+  padding: 20px;
+}
+
+/* Strike-through Animation */
+.todo-item.completed .todo-text:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 2px;
+  background: #ef4444;
+  animation: strike 0.3s ease-out forwards;
+}
+
+/* Smooth Transitions */
+button,
+.todo-item,
+input[type="checkbox"] {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom Scrollbar (optional) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bfdbfe;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #93c5fd;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+
+  #todoForm {
+    flex-direction: column;
+  }
+
+  #taskInput {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
