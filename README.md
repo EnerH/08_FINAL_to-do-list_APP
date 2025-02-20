@@ -18,7 +18,7 @@ A full-stack todo list application with CRUD operations, featuring a Node.js bac
 
 # Steps
 
-1. ## Clone the Repository**
+1. ## Clone the Repository
    ```bash
    git clone https://github.com/your-username/todo-app.git
    cd todo-app
@@ -27,7 +27,7 @@ A full-stack todo list application with CRUD operations, featuring a Node.js bac
    ```bash
    npm install
 
-3. ## Database Setup**
+3. ## Database Setup
    ```bash
    CREATE TABLE todos (
     id SERIAL PRIMARY KEY,
@@ -35,7 +35,7 @@ A full-stack todo list application with CRUD operations, featuring a Node.js bac
     completed BOOLEAN DEFAULT FALSE
     );
 
-4. ## Environment Configuration**
+4. ## Environment Configuration
    ```bash
     DB_HOST=localhost
     DB_USER=postgres
@@ -43,11 +43,11 @@ A full-stack todo list application with CRUD operations, featuring a Node.js bac
     DB_NAME=your_database_name
     DB_PORT=5432
 
-5. ## Runnng Apllication**
+5. ## Runnng Apllication
    ```bash
      node server.js
 
-6. **Access to application**
+6. ## Access to application
     ```bash
    http://localhost:3000
 
