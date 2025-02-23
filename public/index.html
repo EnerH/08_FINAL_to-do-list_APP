@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
 <!-- node server.js -->
-
 <html lang="en">
   <head>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -10,42 +8,79 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To Do App</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="bg-gradient-to-br from-indigo-100 to-blue-100 min-h-screen p-8">
-    <div class="max-w-2xl mx-auto">
-      <div
-        class="bg-white rounded-2xl shadow-lg p-6 mb-8 animate__animated animate__fadeIn"
-      >
-        <div class="flex justify-center items-center mb-8 gap-3 w-full">
-          <h1
-            class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"
+    <div id="app">
+      <div id="loginSection" class="">
+        <div class="max-w-2xl mx-auto">
+          <div
+            class="bg-white rounded-2xl shadow-lg p-6 mb-8 animate__animated animate__fadein"
           >
-            To Do List
-          </h1>
-          <span class="text-4xl">🏄‍♂️</span>
+            <h2 class="text-2xl mb-4">Login</h2>
+            <input
+              type="text"
+              id="username"
+              placeholder="Username"
+              class="p-2 mb-2 border border-gray-300 rounded"
+            />
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              class="p-2 mb-2 border border-gray-300 rounded"
+            />
+            <button id="loginButton" class="bg-blue-500 text-white p-2 rounded">
+              Login
+            </button>
+            <button
+              id="signupButton"
+              class="bg-green-500 text-white p-2 rounded ml-2"
+            >
+              Sign Up
+            </button>
+          </div>
         </div>
-
-        <form id="todoForm" class="flex gap-3 mb-8">
-          <input
-            id="taskInput"
-            type="text"
-            class="flex-1 p-4 rounded-xl border-2 border-blue-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
-            placeholder="Add new task..."
-          />
-          <button
-            type="submit"
-            class="px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105"
+      </div>
+      <div id="todoApp" class="hidden">
+        <div class="max-w-2xl mx-auto">
+          <div
+            class="bg-white rounded-2xl shadow-lg p-6 mb-8 animate__animated animate__fadein"
           >
-            Add Task
-          </button>
-        </form>
-
-        <ul id="todoList" class="space-y-3"></ul>
+            <div class="flex justify-center items-center mb-8 gap-3 w-full">
+              <h1
+                class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"
+              >
+                To Do List
+              </h1>
+              <span class="text-4xl">🏄‍♂️</span>
+            </div>
+            <form id="todoForm" class="flex gap-3 mb-8">
+              <input
+                id="taskInput"
+                type="text"
+                class="flex-1 p-4 rounded-xl border-2 border-blue-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
+                placeholder="Add new task..."
+              />
+              <button
+                type="submit"
+                class="px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105"
+              >
+                Add Task
+              </button>
+            </form>
+            <ul id="todoList" class="space-y-3"></ul>
+          </div>
+        </div>
+        <button
+          id="logoutButton"
+          class="fixed bottom-4 right-4 bg-red-500 text-white p-2 rounded"
+        >
+          Logout
+        </button>
       </div>
     </div>
     <script src="app.js"></script>

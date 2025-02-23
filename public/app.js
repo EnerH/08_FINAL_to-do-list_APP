@@ -1,27 +1,95 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const form = document.getElementById("todoForm");
   const input = document.getElementById("taskInput");
   const list = document.getElementById("todoList");
 
-  // Load todos on startup
-  fetchTodos();
+  async function fetchUser() {
+    const response = await fetch("/api/user", { credentials: "include" });
+    const user = await response.json();
+    const loginSection = document.getElementById("loginSection");
+    const todoApp = document.getElementById("todoApp");
+    if (user.user_id) {
+      loginSection.classList.add("hidden");
+      todoApp.classList.remove("hidden");
+      fetchTodos();
+    } else {
+      loginSection.classList.remove("hidden");
+      todoApp.classList.add("hidden");
+    }
+  }
+
+  fetchUser();
+
+  document.getElementById("loginButton").addEventListener("click", async () => {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+        credentials: "include",
+      });
+      if (response.ok) {
+        fetchUser();
+      } else {
+        const error = await response.json();
+        alert(error.error);
+      }
+    } catch (err) {
+      alert("Login failed");
+    }
+  });
+
+  document
+    .getElementById("signupButton")
+    .addEventListener("click", async () => {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      try {
+        const response = await fetch("/api/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+          credentials: "include",
+        });
+        if (response.ok) {
+          fetchUser();
+        } else {
+          const error = await response.json();
+          alert(error.error);
+        }
+      } catch (err) {
+        alert("Sign up failed");
+      }
+    });
+
+  document
+    .getElementById("logoutButton")
+    .addEventListener("click", async () => {
+      try {
+        await fetch("/api/logout", { credentials: "include" });
+        fetchUser();
+      } catch (err) {
+        alert("Logout failed");
+      }
+    });
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (!input.value.trim()) return;
-
     await fetch("/api/todos", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ task: input.value }),
+      credentials: "include",
     });
-
     input.value = "";
     fetchTodos();
   });
 
   async function fetchTodos() {
-    const response = await fetch("/api/todos");
+    const response = await fetch("/api/todos", { credentials: "include" });
     const todos = await response.json();
     renderTodos(todos);
   }
@@ -75,32 +143,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.toggleTodo = async (id, currentStatus) => {
     const checkbox = event.target;
-    checkbox.disabled = true; // Prevent multiple clicks
-
+    checkbox.disabled = true;
     try {
       const response = await fetch(`/api/todos/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ completed: !currentStatus }),
+        credentials: "include",
       });
-
       if (!response.ok) throw new Error("Update failed");
-
-      // Visual feedback
       checkbox.parentElement.classList.toggle("completed");
       setTimeout(() => {
-        fetchTodos(); // Full refresh after animation
+        fetchTodos();
       }, 300);
     } catch (error) {
       console.error("Toggle error:", error);
-      checkbox.checked = currentStatus; // Revert visual state
+      checkbox.checked = currentStatus;
       alert("Failed to update status");
     } finally {
       checkbox.disabled = false;
     }
   };
+
   window.deleteTodo = async (id) => {
-    await fetch(`/api/todos/${id}`, { method: "DELETE" });
+    await fetch(`/api/todos/${id}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
     fetchTodos();
   };
 
@@ -111,6 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ task: newTask }),
+        credentials: "include",
       });
       fetchTodos();
     }
